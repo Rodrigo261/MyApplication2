@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="204dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="motas loja"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pesquisa"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="16dp"
+        android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+        android:drawablePadding="8dp"
+        android:ems="10"
+        android:hint="Search"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/socialicons"
+        android:layout_below="@+id/pesquisa"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="280dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Mota"
+        />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Mota"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pesquisa"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="149dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pesquisa"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="152dp"
+        android:layout_toEndOf="@+id/imageView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+</RelativeLayout>
