@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="motas loja"
+        android:text="loja das motas"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
