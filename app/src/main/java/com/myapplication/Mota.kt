@@ -13,9 +13,9 @@ data class Mota(
     fun toContentValues() : ContentValues {
         val valores = ContentValues()
 
-        valores.put(/*nome da tabela*/.CAMPO_NOME, nome)
-        valores.put(.CAMPO_PRECO, preco)
-        valores.put(.CAMPO_CATEGORIA_ID, idMota)
+        valores.put(tabelaBDMota.CAMPO_NOME, nome)
+        valores.put(tabelaBDMota.CAMPO_PRECO, preco)
+        valores.put(tabelaBDMota.CAMPO_CATEGORIA_ID, idMota)
 
         return valores
     }
@@ -23,9 +23,9 @@ data class Mota(
     companion object {
         fun fromCursor(cursor: Cursor): Mota {
             val posId = cursor.getColumnIndex(BaseColumns._ID)
-            val posNome = cursor.getColumnIndex(.CAMPO_Nome)
-            val posPRECO = cursor.getColumnIndex(.CAMPO_PRECO)
-            val posIdCateg = cursor.getColumnIndex(/*nome da tabela*/.CAMPO_CATEGORIA_ID)
+            val posNome = cursor.getColumnIndex(tabelaBDMota.CAMPO_Nome)
+            val posPRECO = cursor.getColumnIndex(tabelaBDMota.CAMPO_PRECO)
+            val posIdCateg = cursor.getColumnIndex(tabelaBDMota.CAMPO_CATEGORIA_ID)
 
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNome)
