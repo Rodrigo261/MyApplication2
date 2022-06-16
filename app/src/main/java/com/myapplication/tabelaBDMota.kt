@@ -3,11 +3,12 @@ package com.myapplication
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import com.example.myapplication.bd
+import com.example.myapplication.tabelaCat
 import com.example.myapplication.tabelaCategoria
 
 class TabelaBDMotas(db: SQLiteDatabase) : bd(db, NOME) {
     override fun cria() {
-        db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_Nome TEXT NOT NULL, $CAMPO_PRECO TEXT NOT NULL, $CAMPO_Mota_ID INTEGER NOT NULL, FOREIGN KEY ($CAMPO_CATEGORIA_ID) REFERENCES ${tabelaCategoria.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+        db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_Nome TEXT NOT NULL, $CAMPO_PRECO TEXT NOT NULL, $CAMPO_Mota_ID INTEGER NOT NULL, FOREIGN KEY (${CAMPO_Mota_ID}_ID) REFERENCES ${tabelaCat.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
 
