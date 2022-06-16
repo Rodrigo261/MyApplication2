@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import com.example.myapplication.bd
 import com.example.myapplication.tabelaCat
-import com.example.myapplication.tabelaCategoria
+
 
 class TabelaBDMotas(db: SQLiteDatabase) : bd(db, NOME) {
     override fun cria() {

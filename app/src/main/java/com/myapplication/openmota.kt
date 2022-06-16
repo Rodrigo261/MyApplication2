@@ -17,6 +17,10 @@ class OpenBD(context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO) 
         TabelaBDMotas(db).cria()
     }
 
+    private fun TabelaCat(db: SQLiteDatabase): Any {
+
+    }
+
     /**
      * Called when the database needs to be upgraded. The implementation
      * should use this method to drop tables, add tables, or do anything else it
