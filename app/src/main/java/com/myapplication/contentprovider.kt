@@ -162,7 +162,7 @@ class ContentProvider : ContentProvider() {
         when (getUriMatcher().match(uri)) {
             URI_Motas -> "$MULTIPLOS_REGISTOS/${TabelaBDMotas.NOME}"
             URI_CATEGORIAS -> "$MULTIPLOS_REGISTOS/${TabelaBDCategorias.NOME}"
-            URI_LIVRO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaBDLivros.NOME}"
+            URI_Mota_ESPECIFICO -> "$UNICO_REGISTO/${TabelaBDMotas.NOME}"
             URI_CATEGORIA_ESPECIFICA -> "$UNICO_REGISTO/${TabelaBDCategorias.NOME}"
             else -> null
         }
@@ -185,7 +185,7 @@ class ContentProvider : ContentProvider() {
         requireNotNull(values)
 
         val id = when (getUriMatcher().match(uri)) {
-            URI_LIVROS -> TabelaBDLivros(db).insert(values)
+            URI_Motas -> TabelaBDMotas(db).insert(values)
             URI_CATEGORIAS -> TabelaBDCategorias(db).insert(values)
             else -> -1
         }
@@ -226,7 +226,7 @@ class ContentProvider : ContentProvider() {
         val id = uri.lastPathSegment
 
         val registosApagados = when (getUriMatcher().match(uri)) {
-            URI_LIVRO_ESPECIFICO -> TabelaBDLivros(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Mota_ESPECIFICO -> TabelaBDMotas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
             URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
             else -> 0
         }
@@ -264,7 +264,7 @@ class ContentProvider : ContentProvider() {
         val id = uri.lastPathSegment
 
         val registosAlterados = when (getUriMatcher().match(uri)) {
-            URI_LIVRO_ESPECIFICO -> TabelaBDLivros(db).update(values, "${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Mota_ESPECIFICO -> TabelaBDMotas(db).update(values, "${BaseColumns._ID}=?", arrayOf("${id}"))
             URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
             else -> 0
         }
@@ -280,7 +280,7 @@ class ContentProvider : ContentProvider() {
         const val URI_CATEGORIAS = 100
         const val URI_CATEGORIA_ESPECIFICA = 101
         const val URI_Motas= 200
-        const val URI_LIVRO_ESPECIFICO = 201
+        const val URI_Mota_ESPECIFICO = 201
 
         const val UNICO_REGISTO = "vnd.android.cursor.item"
         const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
@@ -288,10 +288,10 @@ class ContentProvider : ContentProvider() {
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
-            uriMatcher.addURI(AUTHORITY, TabelaBDCategorias.NOME, URI_CATEGORIAS)
+            uriMatcher.addURI(AUTHORITY, tabelacat.NOME, URI_CATEGORIAS)
             uriMatcher.addURI(AUTHORITY, "${TabelaBDCategorias.NOME}/#", URI_CATEGORIA_ESPECIFICA)
-            uriMatcher.addURI(AUTHORITY, TabelaBDLivros.NOME, URI_LIVROS)
-            uriMatcher.addURI(AUTHORITY, "${TabelaBDLivros.NOME}/#", URI_LIVRO_ESPECIFICO)
+            uriMatcher.addURI(AUTHORITY, TabelaBDMotas.NOME, URI_Motas)
+            uriMatcher.addURI(AUTHORITY, "${TabelaBDMotas.NOME}/#", URI_Mota_ESPECIFICO)
 
             return uriMatcher
         }

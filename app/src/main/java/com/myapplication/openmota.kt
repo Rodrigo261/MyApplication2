@@ -15,6 +15,7 @@ class OpenBD(context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO) 
 
         TabelaCat(db).cria()
         TabelaBDMotas(db).cria()
+
     }
 
     private fun TabelaCat(db: SQLiteDatabase): Any {
