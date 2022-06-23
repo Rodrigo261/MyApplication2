@@ -5,17 +5,17 @@ import android.provider.BaseColumns
 
 data class Mota(
     var nome : String,
-    var preco: String,
-    var idMota: Long,
+    var preco: Float,
+    var cc: Int,
     var id: Long = -1
 
 ) {
     fun toContentValues() : ContentValues {
         val valores = ContentValues()
 
-        valores.put(tabelaBDMotas.CAMPO_NOME, nome)
-        valores.put(tabelaBDMotas.CAMPO_PRECO, preco)
-        valores.put(tabelaBDMotas.CAMPO_Mota_ID, idMota)
+        valores.put(TabelaBDMotas.CAMPO_Nome, nome)
+        valores.put(TabelaBDMotas.CAMPO_PRECO, preco)
+        valores.put(TabelaBDMotas.CAMPO_CC,cc)
 
         return valores
     }
@@ -23,16 +23,14 @@ data class Mota(
     companion object {
         fun fromCursor(cursor: Cursor): Mota {
             val posId = cursor.getColumnIndex(BaseColumns._ID)
-            val posNome = cursor.getColumnIndex(tabelaBDMotas.CAMPO_Nome)
-            val posPRECO = cursor.getColumnIndex(tabelaBDMotas.CAMPO_PRECO)
-            val posIdCateg = cursor.getColumnIndex(tabelaBDMotas.CAMPO_Mota_ID)
-
+            val posNome = cursor.getColumnIndex(TabelaBDMotas.CAMPO_Nome)
+            val posPRECO = cursor.getColumnIndex(TabelaBDMotas.CAMPO_PRECO)
+            val posCC = cursor.getColumnIndex(TabelaBDMotas.CAMPO_CC)
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNome)
-            val preco = cursor.getString(posPRECO)
-            val idMota = cursor.getLong(posIdCateg)
-
-            return Mota(nome, preco, idMota, id)
+            val preco = cursor.getFloat(posPRECO)
+            val cc = cursor.getInt(posCC)
+            return Mota(nome, preco,cc, id)
         }
     }
 }
