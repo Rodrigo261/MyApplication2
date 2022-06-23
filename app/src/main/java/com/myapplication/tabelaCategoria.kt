@@ -9,7 +9,7 @@ class tabelaCat(db: SQLiteDatabase) : bd(db, NOME) {
     }
 
     companion object {
-        const val NOME = "tipos"
+        const val NOME = "tipo"
         const val CAMPO_NOME = "tipo marcas"
     }
 }
