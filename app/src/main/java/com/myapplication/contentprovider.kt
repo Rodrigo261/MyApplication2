@@ -128,9 +128,11 @@ class ContentProvider : ContentProvider() {
 
         val cursor = when (getUriMatcher().match(uri)) {
             URI_Motas -> TabelaBDMotas(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
-            URI_CATEGORIAS -> TabelaCat(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
-            URI_LIVRO_ESPECIFICO -> TabelaBDLivros(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
-            URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_Clientes-> TabelaBDClientes(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_Vendas-> TabelaBDVendas(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_Mota_ESPECIFICO -> TabelaBDMotas(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_Cliente_ESPECIFICA -> TabelaBDClientes(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_Venda_ESPECIFICO -> TabelaBDClientes(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
             else -> null
         }
 
@@ -161,9 +163,11 @@ class ContentProvider : ContentProvider() {
     override fun getType(uri: Uri): String? =
         when (getUriMatcher().match(uri)) {
             URI_Motas -> "$MULTIPLOS_REGISTOS/${TabelaBDMotas.NOME}"
-            URI_CATEGORIAS -> "$MULTIPLOS_REGISTOS/${TabelaBDCategorias.NOME}"
+            URI_Clientes -> "$MULTIPLOS_REGISTOS/${TabelaBDClientes.NOME}"
+            URI_Vendas -> "$MULTIPLOS_REGISTOS/${TabelaBDVendas.NOME}"
             URI_Mota_ESPECIFICO -> "$UNICO_REGISTO/${TabelaBDMotas.NOME}"
-            URI_CATEGORIA_ESPECIFICA -> "$UNICO_REGISTO/${TabelaBDCategorias.NOME}"
+            URI_Cliente_ESPECIFICA -> "$UNICO_REGISTO/${TabelaBDClientes.NOME}"
+            URI_Venda_ESPECIFICO -> "$UNICO_REGISTO/${TabelaBDVendas.NOME}"
             else -> null
         }
 
@@ -186,7 +190,8 @@ class ContentProvider : ContentProvider() {
 
         val id = when (getUriMatcher().match(uri)) {
             URI_Motas -> TabelaBDMotas(db).insert(values)
-            URI_CATEGORIAS -> TabelaBDCategorias(db).insert(values)
+            URI_Clientes -> TabelaBDClientes(db).insert(values)
+            URI_Vendas-> TabelaBDVendas(db).insert(values)
             else -> -1
         }
 
@@ -227,7 +232,8 @@ class ContentProvider : ContentProvider() {
 
         val registosApagados = when (getUriMatcher().match(uri)) {
             URI_Mota_ESPECIFICO -> TabelaBDMotas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
-            URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Cliente_ESPECIFICA -> TabelaBDClientes(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Venda_ESPECIFICO-> TabelaBDVendas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
             else -> 0
         }
 
@@ -265,7 +271,8 @@ class ContentProvider : ContentProvider() {
 
         val registosAlterados = when (getUriMatcher().match(uri)) {
             URI_Mota_ESPECIFICO -> TabelaBDMotas(db).update(values, "${BaseColumns._ID}=?", arrayOf("${id}"))
-            URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Cliente_ESPECIFICA -> TabelaBDClientes(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_Venda_ESPECIFICO -> TabelaBDVendas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
             else -> 0
         }
 
@@ -275,12 +282,14 @@ class ContentProvider : ContentProvider() {
     }
 
     companion object {
-        const val AUTHORITY = "pt.ipg.livros"
+        const val AUTHORITY = "com.myapplication"
 
-        const val URI_CATEGORIAS = 100
-        const val URI_CATEGORIA_ESPECIFICA = 101
+        const val URI_Clientes = 100
+        const val URI_Cliente_ESPECIFICA = 101
         const val URI_Motas= 200
         const val URI_Mota_ESPECIFICO = 201
+        const val URI_Vendas= 300
+        const val URI_Venda_ESPECIFICO = 301
 
         const val UNICO_REGISTO = "vnd.android.cursor.item"
         const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
@@ -288,10 +297,12 @@ class ContentProvider : ContentProvider() {
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
-            uriMatcher.addURI(AUTHORITY, tabelacat.NOME, URI_CATEGORIAS)
-            uriMatcher.addURI(AUTHORITY, "${TabelaBDCategorias.NOME}/#", URI_CATEGORIA_ESPECIFICA)
+            uriMatcher.addURI(AUTHORITY,    TabelaBDClientes.NOME, URI_Clientes)
+            uriMatcher.addURI(AUTHORITY, "${TabelaBDClientes.NOME}/#", URI_Cliente_ESPECIFICA)
             uriMatcher.addURI(AUTHORITY, TabelaBDMotas.NOME, URI_Motas)
             uriMatcher.addURI(AUTHORITY, "${TabelaBDMotas.NOME}/#", URI_Mota_ESPECIFICO)
+            uriMatcher.addURI(AUTHORITY, TabelaBDMotas.NOME, URI_Vendas)
+            uriMatcher.addURI(AUTHORITY, "${TabelaBDMotas.NOME}/#", URI_Venda_ESPECIFICO)
 
             return uriMatcher
         }
