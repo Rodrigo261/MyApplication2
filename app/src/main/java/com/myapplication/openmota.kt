@@ -13,14 +13,12 @@ class OpenBD(context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO) 
     override fun onCreate(db: SQLiteDatabase?) {
         requireNotNull(db)
 
-        TabelaCat(db).cria()
+        TabelaBDClientes(db).cria()
         TabelaBDMotas(db).cria()
-
+        TabelaBDVendas(db).cria()
     }
 
-    private fun TabelaCat(db: SQLiteDatabase): Any {
 
-    }
 
     /**
      * Called when the database needs to be upgraded. The implementation
